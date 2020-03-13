@@ -1,6 +1,11 @@
 package com.company;
 
-public class Song {
+import java.io.Serializable;
+
+public class Song implements Serializable {
+
+
+    private static final long serialVersionUID = -626879714821753680L;
 
     private String songName;
     private String artistName;
@@ -12,12 +17,13 @@ public class Song {
     public Song() {
     }
 
-    public Song(String SongName, String artistName, String genre, double rating, int duration) {
-        this.songName = SongName;
+    public Song(String songName, String artistName, String genre, double rating, int duration, int timesPlayed) {
+        this.songName = songName;
         this.artistName = artistName;
         this.genre = genre;
         this.rating = rating;
         this.duration = duration;
+        this.timesPlayed = timesPlayed;
     }
 
     public String getGenre() {
@@ -69,8 +75,8 @@ public class Song {
     }
 
     public void play() {
-        if (!(SongList.getPlayedSongs().contains(this))) {
-            SongList.getPlayedSongs().add(this);
+        if (!(Playlist.getPlayedSongs().contains(this))) {
+            Playlist.getPlayedSongs().add(this);
             this.timesPlayed = this.timesPlayed + 1;
             System.out.println("Currently listening to " + this.getArtistName() + " - " + this.getSongName()
                     + " | " + this.getTimesPlayed() + ". time");

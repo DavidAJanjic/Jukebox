@@ -22,3 +22,13 @@ out/
 *.iws
 
 TDD Digitron.kotlin_module
+/compiler.xml
+/description.html
+/encodings.xml
+/libraries/*
+/misc.xml
+/modules.xml
+/project-template.xml
+/uiDesigner.xml
+/vcs.xml
+/workspace.xml

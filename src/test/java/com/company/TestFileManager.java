@@ -9,14 +9,14 @@ public class TestFileManager {
 
     @Test
     public void testFileManager() throws FileNotFoundException { //tests both readFile() and writeFile()
-        SongList songList = new SongList();
+        Playlist playlist = new Playlist();
         ArrayList<Song> songs = new ArrayList<>();
-        Song s1 = new Song("Turbulentno", "Ceca","Folk",5.0,196);
-        Song s2 = new Song("Crno i zlatno", "Seka Aleksic","Folk",5.0,250);
+        Song s1 = new Song("Turbulentno", "Ceca","Folk",5.0,196,0);
+        Song s2 = new Song("Crno i zlatno", "Seka Aleksic","Folk",5.0,250,0);
         songs.add(s1);
         songs.add(s2);
-        songList.setSongList(songs);
-        FileManager.writeFile(songList);
+        playlist.setSongList(songs);
+        FileManager.writeFile(playlist);
         songs = Parser.parse(FileManager.readFile());
         assertEquals(songs.get(0).getSongName(),"Turbulentno");
         assertEquals(songs.get(1).getSongName(),"Crno i zlatno");
