@@ -2,35 +2,44 @@ package com.company;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class ObjectIO {
-    static String filepath = "C://Users/Quantox/Desktop/Jukebox.txt";
+public class ObjectIO implements SongReader {
 
-    public static ArrayList<Song> readFile() throws IOException, ClassNotFoundException {
+    public List<Song> readFile() {
         ArrayList<Song> songs = new ArrayList<>();
-        FileInputStream fis = new FileInputStream(filepath);
-        ObjectInputStream ois = new ObjectInputStream(fis);
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
         try {
-            songs = (ArrayList<Song>) ois.readObject();
+            fis = new FileInputStream(AppConfig.filepath);
+            ois = new ObjectInputStream(fis);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            fis.close();
-            ois.close();
+        }
+        try {
+            songs = (ArrayList<Song>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }  finally {
+            try {
+                fis.close();
+                ois.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return songs;
     }
 
-    public static void writeFile(Playlist playlist) {
-
+    public void writeFile(Playlist playlist) {
         writeObjectToFile(playlist.getSongList());
     }
 
-    public static void writeObjectToFile(ArrayList<Song> o) {
+    public static void writeObjectToFile(List<Song> o) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
-            fos = new FileOutputStream(filepath);
+            fos = new FileOutputStream(AppConfig.filepath);
             oos = new ObjectOutputStream(fos);
             oos.writeObject(o);
             System.out.println("Object succesfully written to a file.");

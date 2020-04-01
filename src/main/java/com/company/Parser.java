@@ -30,8 +30,7 @@ public class Parser {
     public static ArrayList<Song> parse(String string) {
         ArrayList<Song> playlist = new ArrayList<>();
         String[] list = string.split("\n");
-        List<String> stringList = Arrays.asList(list);
-        for (String line : stringList) {
+        for (String line : list) {
             Song song = new Song();
             String[] s1 = line.split("-", 2);
             song.setArtistName(s1[0]);
@@ -50,7 +49,7 @@ public class Parser {
         return playlist;
     }
 
-    public static String parseOut(ArrayList<Song> songs) {
+    public static String parseOut(List<Song> songs) {
         String result = "";
         for (Song x : songs) {
             result += x.getArtistName() + "-" + x.getSongName() + "," + x.getGenre() + ","

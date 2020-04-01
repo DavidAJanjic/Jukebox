@@ -2,30 +2,41 @@ package com.company;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CharacterFileManager implements SongReader {
-    private static File file = new File("C://Users/Quantox/Desktop/Jukebox.txt");
 
-
-    public static ArrayList<String> readFile() throws IOException {
-        ArrayList<String> fileList = new ArrayList<>();
-        InputStream in = new FileInputStream(file);
+    public List<Song> readFile() {
+        List<String> fileList = new ArrayList<>();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(AppConfig.filepath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
         String line;
-        while ((line = br.readLine()) != null) {
-            fileList.add(line);
+        while (true) {
+            try {
+                if ((line = br.readLine()) == null) break;
+                fileList.add(line);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return fileList;
+        List<Song> songs;
+        songs = Parser.parse(fileList);
+        return songs;
     }
 
-    public static void writeFile(Playlist playlist) throws FileNotFoundException {
+    public void writeFile(Playlist playlist) {
 
-        ArrayList<Song> songs = playlist.getSongList();
+        List<Song> songs = playlist.getSongList();
         BufferedWriter bw = null;
         try {
             String data = Parser.parseOut(songs);
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(AppConfig.filepath);
             bw = new BufferedWriter(fw);
             bw.write(data);
 

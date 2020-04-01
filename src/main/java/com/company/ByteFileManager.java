@@ -1,22 +1,25 @@
 package com.company;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ByteFileManager implements SongReader {
-    private static File file = new File("C://Users/Quantox/Desktop/Jukebox.txt");
 
-    public static String readFile() throws IOException {
+    public List<Song> readFile() {
         FileInputStream in = null;
         BufferedInputStream bin = null;
         StringBuilder line = new StringBuilder();
         try {
-            in = new FileInputStream(file);
+            in = new FileInputStream(AppConfig.filepath);
             bin = new BufferedInputStream(in);
 
             while (bin.available() > 0) {
                 line.append((char) bin.read());
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
             try {
                 if (bin != null | in != null) {
@@ -27,22 +30,28 @@ public class ByteFileManager implements SongReader {
                 e.printStackTrace();
             }
         }
-        return line.toString();
-
+        List<Song> songs;
+        songs = Parser.parse(line.toString());
+        return songs;
     }
 
-    public static void writeFile(Playlist playlist) throws IOException {
+    public void writeFile(Playlist playlist) {
         String text = Parser.parseOut(playlist.getSongList());
         FileOutputStream fop = null;
         try {
-            fop = new FileOutputStream(file);
+            fop = new FileOutputStream(AppConfig.filepath);
             byte[] textInBytes = text.getBytes();
             fop.write(textInBytes);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            fop.flush();
-            fop.close();
+            try {
+                fop.flush();
+                fop.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
     }

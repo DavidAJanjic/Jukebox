@@ -1,19 +1,22 @@
 package com.company;
 
+import jdk.nashorn.internal.runtime.linker.LinkerCallSite;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.*;
 
 public class TestPlaylistManager {
 
     @Test
-    public void testOrderBySongName() throws FileNotFoundException {
+    public void testOrderBySongName() {
+        SongReader sr = new FileManager();
         Playlist playlist = new Playlist();
-        ArrayList<Song> songs;
-        songs = Parser.parse(FileManager.readFile());
+        List<Song> songs;
+        songs = sr.readFile();
         playlist.setSongList(songs);
         PlaylistManager.orderBySongName(playlist);
         assertEquals(playlist.getSongList().get(0).getSongName(), "Damelo");
@@ -22,10 +25,11 @@ public class TestPlaylistManager {
     }
 
     @Test
-    public void testOrderingByLength() throws FileNotFoundException {
+    public void testOrderingByLength() {
+        SongReader sr = new FileManager();
         Playlist playlist = new Playlist();
-        ArrayList<Song> songs;
-        songs = Parser.parse(FileManager.readFile());
+        List<Song> songs;
+        songs = sr.readFile();
         playlist.setSongList(songs);
         PlaylistManager.orderByLength(playlist);
         assertEquals(playlist.getSongList().get(0).getDuration(), 252);
@@ -33,10 +37,11 @@ public class TestPlaylistManager {
     }
 
     @Test
-    public void testOredringByRating() throws FileNotFoundException {
+    public void testOredringByRating() {
+        SongReader sr = new FileManager();
         Playlist playlist = new Playlist();
-        ArrayList<Song> songs;
-        songs = Parser.parse(FileManager.readFile());
+        List<Song> songs;
+        songs = sr.readFile();
         playlist.setSongList(songs);
         PlaylistManager.orderByRating(playlist);
         assertEquals(playlist.getSongList().get(0).getRating(), 5.0);
@@ -44,10 +49,11 @@ public class TestPlaylistManager {
     }
 
     @Test
-    public void testOrderingByArtistName() throws FileNotFoundException {
+    public void testOrderingByArtistName() {
+        SongReader sr = new FileManager();
         Playlist playlist = new Playlist();
-        ArrayList<Song> songs;
-        songs = Parser.parse(FileManager.readFile());
+        List<Song> songs;
+        songs = sr.readFile();
         playlist.setSongList(songs);
         PlaylistManager.orderByArtistName(playlist);
         assertEquals(playlist.getSongList().get(0).getArtistName(), "Ana Kokic");
@@ -55,10 +61,11 @@ public class TestPlaylistManager {
     }
 
     @Test
-    public void testOrderingByGenre() throws FileNotFoundException {
+    public void testOrderingByGenre() {
+        SongReader sr = new FileManager();
         Playlist playlist = new Playlist();
-        ArrayList<Song> songs;
-        songs = Parser.parse(FileManager.readFile());
+        List<Song> songs;
+        songs = sr.readFile();
         playlist.setSongList(songs);
         PlaylistManager.orderByGenre(playlist);
         assertEquals(playlist.getSongList().get(0).getGenre(), "Folk");
@@ -66,48 +73,51 @@ public class TestPlaylistManager {
     }
 
     @Test
-    public void testAdd() throws FileNotFoundException {
+    public void testAdd() {
+        SongReader sr = new FileManager();
         Playlist playlist = new Playlist();
-        ArrayList<Song> songs;
-        songs = Parser.parse(FileManager.readFile());
+        List<Song> songs;
+        songs = sr.readFile();
         playlist.setSongList(songs);
-        Song song = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247,0);
+        Song song = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
         PlaylistManager.add(playlist, song);
-        assertEquals(songs.get(songs.size()-1).getSongName(), "Ruzmarin");
-        assertEquals(songs.get(songs.size()-1).getGenre(), "Narodna");
+        assertEquals(songs.get(songs.size() - 1).getSongName(), "Ruzmarin");
+        assertEquals(songs.get(songs.size() - 1).getGenre(), "Narodna");
     }
 
     @Test
-    public void testRemoveWithInt() throws FileNotFoundException {
+    public void testRemoveWithInt() {
+        SongReader sr = new FileManager();
         Playlist playlist = new Playlist();
-        ArrayList<Song> songs;
-        songs = Parser.parse(FileManager.readFile());
+        List<Song> songs;
+        songs = sr.readFile();
         playlist.setSongList(songs);
-        Song song = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247,0);
+        Song song = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
         songs.add(song);
         PlaylistManager.remove(playlist, 7);
-        assertEquals(songs.size(),7);
+        assertEquals(songs.size(), 7);
         PlaylistManager.remove(playlist, 7);
         assertEquals(songs.size(), 7);
     }
 
     @Test
-    public void testRemoveWithObject() throws FileNotFoundException {
+    public void testRemoveWithObject() {
+        SongReader sr = new FileManager();
         Playlist playlist = new Playlist();
-        ArrayList<Song> songs;
-        songs = Parser.parse(FileManager.readFile());
+        List<Song> songs;
+        songs = sr.readFile();
         playlist.setSongList(songs);
-        Song song = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247,0);
+        Song song = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
         songs.add(song);
         PlaylistManager.remove(playlist, song);
-        assertEquals(songs.size(),7);
+        assertEquals(songs.size(), 7);
         PlaylistManager.remove(playlist, song);
         assertEquals(songs.size(), 7);
     }
 
     @Test
     public void testSetPlayedSongs() {
-        ArrayList<Song> songs = new ArrayList<>();
+        List<Song> songs = new ArrayList<>();
         Song s1 = new Song("Merak", "Zdravko Colic", "Folk", 4.9, 211, 0);
         Song s2 = new Song("Svicarska", "Dino Merlin", "Zabavna", 4.8, 312, 0);
         songs.add(s1);

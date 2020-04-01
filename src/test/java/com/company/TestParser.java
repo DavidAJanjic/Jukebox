@@ -13,10 +13,11 @@ import java.util.List;
 public class TestParser {
 
     @Test
-    public void testParseStringList() throws FileNotFoundException {
-        List<Song> playList = Parser.parse(FileManager.readFile());
+    public void testParseStringList() {
+        SongReader sr = new FileManager();
+        List<Song> playList = sr.readFile();
         assertNotNull(playList);
-        assertTrue(!playList.isEmpty());
+        assertFalse(playList.isEmpty());
         Song natasaBekvalac = playList.get(2);
         assertEquals(natasaBekvalac.getArtistName(), "Natasa Bekvalac");
         assertEquals(natasaBekvalac.getSongName(), "Ja sam dobro");
@@ -33,16 +34,17 @@ public class TestParser {
     }
 
     @Test
-    public void testParseOut() throws FileNotFoundException {
-        ArrayList<Song> songs = new ArrayList<>();
+    public void testParseOut() {
+        SongReader sr = new FileManager();
+        List<Song> songs = new ArrayList<>();
         Song s1 = new Song("Merak", "Zdravko Colic", "Folk", 4.9, 211, 0);
         Song s2 = new Song("Svicarska", "Dino Merlin", "Zabavna", 4.8, 312, 0);
         songs.add(s1);
         songs.add(s2);
         Playlist playlist = new Playlist();
         playlist.setSongList(songs);
-        FileManager.writeFile(playlist);
-        List<Song> playList = Parser.parse(FileManager.readFile());
+        sr.writeFile(playlist);
+        List<Song> playList = sr.readFile();
         assertEquals(playList.get(0).getSongName(), "Merak");
         assertEquals(playList.get(0).getArtistName(), "Zdravko Colic");
         assertEquals(playList.get(1).getSongName(), "Svicarska");
@@ -51,12 +53,12 @@ public class TestParser {
     }
 
     @Test
-    public void testParseString() throws IOException {
-        String text = ByteFileManager.readFile();
-        ArrayList<Song> songs;
-        songs = Parser.parse(text);
-        assertEquals(songs.get(0).getSongName(),"Turbulentno");
-        assertEquals(songs.get(2).getSongName(),"Ja sam dobro");
+    public void testParseString() {
+        SongReader sr = new FileManager();
+        List<Song> songs;
+        songs = sr.readFile();
+        assertEquals(songs.get(0).getSongName(), "Turbulentno");
+        assertEquals(songs.get(2).getSongName(), "Ja sam dobro");
 
     }
 }
