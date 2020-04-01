@@ -14,7 +14,7 @@ public class TestSong {
         ArrayList<Song> songs;
         songs = Parser.parse(FileManager.readFile());
         songs.get(0).play();
-        Song s1 = SongList.getPlayedSongs().get(0);
+        Song s1 = Playlist.getPlayedSongs().get(0);
         assertEquals(s1.getSongName(),"Turbulentno");
         assertEquals(s1.getTimesPlayed(),2);
         songs.get(0).play();
