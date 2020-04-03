@@ -22,7 +22,7 @@ public class Jukebox {
             System.out.println(x);
         }
         System.out.println();
-        playlist.getSongList().get(3).play();
+        playlist.getSongList().get(2).play();
         System.out.println();
         playlist.getSongList().get(1).play();
         System.out.println();

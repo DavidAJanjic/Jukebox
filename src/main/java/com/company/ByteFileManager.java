@@ -7,6 +7,8 @@ import java.util.List;
 
 public class ByteFileManager implements SongReader {
 
+
+    @Override
     public List<Song> readFile() {
         FileInputStream in = null;
         BufferedInputStream bin = null;
@@ -22,11 +24,13 @@ public class ByteFileManager implements SongReader {
             e.printStackTrace();
         } finally {
             try {
-                if (bin != null | in != null) {
+                if (bin != null) {
                     bin.close();
+                }
+                if (in != null) {
                     in.close();
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -35,6 +39,7 @@ public class ByteFileManager implements SongReader {
         return songs;
     }
 
+    @Override
     public void writeFile(Playlist playlist) {
         String text = Parser.parseOut(playlist.getSongList());
         FileOutputStream fop = null;

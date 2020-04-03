@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class FileManager implements SongReader {
 
+    @Override
     public List<Song> readFile() {
         Scanner x = null;
         try {
@@ -26,6 +27,7 @@ public class FileManager implements SongReader {
         return songs;
     }
 
+    @Override
     public void writeFile(Playlist playlist) {
         PrintStream myconsole = null;
         try {

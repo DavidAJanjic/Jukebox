@@ -26,11 +26,15 @@ public class PlaylistManager {
         }
     }
 
-    public static void remove(Playlist playlist, Song song) {
-        if (!(playlist.getSongList().contains(song))) {
+    public static void remove(Playlist playlist, String songName) {
+        ArrayList<String> songNames = new ArrayList<>();
+        for (Song x : playlist.getSongList()){
+            songNames.add(x.getSongName());
+        }
+        if (!(songNames.contains(songName))) {
             System.out.println("Nema te pesme u listi!");
         } else {
-            playlist.getSongList().remove(song);
+            playlist.getSongList().removeIf(x -> x.getSongName().equals(songName));
         }
     }
 

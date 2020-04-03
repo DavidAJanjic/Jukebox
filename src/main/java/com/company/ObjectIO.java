@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ObjectIO implements SongReader {
 
+    @Override
     public List<Song> readFile() {
         ArrayList<Song> songs = new ArrayList<>();
         FileInputStream fis = null;
@@ -20,7 +21,7 @@ public class ObjectIO implements SongReader {
             songs = (ArrayList<Song>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        }  finally {
+        } finally {
             try {
                 fis.close();
                 ois.close();
@@ -31,6 +32,7 @@ public class ObjectIO implements SongReader {
         return songs;
     }
 
+    @Override
     public void writeFile(Playlist playlist) {
         writeObjectToFile(playlist.getSongList());
     }

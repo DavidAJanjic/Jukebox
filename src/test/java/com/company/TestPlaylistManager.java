@@ -13,106 +13,159 @@ public class TestPlaylistManager {
 
     @Test
     public void testOrderBySongName() {
-        SongReader sr = new FileManager();
+        Song s1 = new Song("Kremen", "Dino Merlin", "Zabavna", 4.5, 178, 0);
+        Song s2 = new Song("Andjela", "Djordje Balasevic", "Balada", 4.9, 287, 0);
+        Song s3 = new Song("Pjevam danju pjevam nocu", "Zdravko Colic", "Ex-Yu", 4.4, 260, 0);
+        Song s4 = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
+        List<Song> songs = new ArrayList<>();
+        songs.add(s1);
+        songs.add(s2);
+        songs.add(s3);
+        songs.add(s4);
         Playlist playlist = new Playlist();
-        List<Song> songs;
-        songs = sr.readFile();
         playlist.setSongList(songs);
+        assertEquals(playlist.getSongList().get(0).getSongName(),"Kremen");
+        assertEquals(playlist.getSongList().get(1).getSongName(),"Andjela");
         PlaylistManager.orderBySongName(playlist);
-        assertEquals(playlist.getSongList().get(0).getSongName(), "Damelo");
-        assertEquals(playlist.getSongList().get(1).getSongName(), "Ja sam dobro");
+        assertEquals(playlist.getSongList().get(0).getSongName(), "Andjela");
+        assertEquals(playlist.getSongList().get(1).getSongName(), "Kremen");
 
     }
 
     @Test
     public void testOrderingByLength() {
-        SongReader sr = new FileManager();
+        Song s1 = new Song("Kremen", "Dino Merlin", "Zabavna", 4.5, 178, 0);
+        Song s2 = new Song("Andjela", "Djordje Balasevic", "Balada", 4.9, 287, 0);
+        Song s3 = new Song("Pjevam danju pjevam nocu", "Zdravko Colic", "Ex-Yu", 4.4, 260, 0);
+        Song s4 = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
+        List<Song> songs = new ArrayList<>();
+        songs.add(s1);
+        songs.add(s2);
+        songs.add(s3);
+        songs.add(s4);
         Playlist playlist = new Playlist();
-        List<Song> songs;
-        songs = sr.readFile();
         playlist.setSongList(songs);
+        assertEquals(playlist.getSongList().get(0).getDuration(),178);
+        assertEquals(playlist.getSongList().get(1).getDuration(),287);
         PlaylistManager.orderByLength(playlist);
-        assertEquals(playlist.getSongList().get(0).getDuration(), 252);
-        assertEquals(playlist.getSongList().get(1).getDuration(), 242);
+        assertEquals(playlist.getSongList().get(0).getDuration(), 287);
+        assertEquals(playlist.getSongList().get(1).getDuration(), 260);
     }
 
     @Test
     public void testOredringByRating() {
-        SongReader sr = new FileManager();
+        Song s1 = new Song("Kremen", "Dino Merlin", "Zabavna", 4.5, 178, 0);
+        Song s2 = new Song("Andjela", "Djordje Balasevic", "Balada", 4.9, 287, 0);
+        Song s3 = new Song("Pjevam danju pjevam nocu", "Zdravko Colic", "Ex-Yu", 4.4, 260, 0);
+        Song s4 = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
+        List<Song> songs = new ArrayList<>();
+        songs.add(s1);
+        songs.add(s2);
+        songs.add(s3);
+        songs.add(s4);
         Playlist playlist = new Playlist();
-        List<Song> songs;
-        songs = sr.readFile();
         playlist.setSongList(songs);
+        assertEquals(playlist.getSongList().get(0).getRating(),4.5);
+        assertEquals(playlist.getSongList().get(1).getRating(),4.9);
         PlaylistManager.orderByRating(playlist);
-        assertEquals(playlist.getSongList().get(0).getRating(), 5.0);
-        assertEquals(playlist.getSongList().get(1).getRating(), 4.9);
+        assertEquals(playlist.getSongList().get(0).getRating(), 4.9);
+        assertEquals(playlist.getSongList().get(1).getRating(), 4.5);
     }
 
     @Test
     public void testOrderingByArtistName() {
-        SongReader sr = new FileManager();
+        Song s1 = new Song("Andjela", "Djordje Balasevic", "Balada", 4.9, 287, 0);
+        Song s2 = new Song("Kremen", "Dino Merlin", "Zabavna", 4.5, 178, 0);
+        Song s3 = new Song("Pjevam danju pjevam nocu", "Zdravko Colic", "Ex-Yu", 4.4, 260, 0);
+        Song s4 = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
+        List<Song> songs = new ArrayList<>();
+        songs.add(s1);
+        songs.add(s2);
+        songs.add(s3);
+        songs.add(s4);
         Playlist playlist = new Playlist();
-        List<Song> songs;
-        songs = sr.readFile();
         playlist.setSongList(songs);
+        assertEquals(playlist.getSongList().get(0).getArtistName(),"Djordje Balasevic");
+        assertEquals(playlist.getSongList().get(1).getArtistName(),"Dino Merlin");
         PlaylistManager.orderByArtistName(playlist);
-        assertEquals(playlist.getSongList().get(0).getArtistName(), "Ana Kokic");
-        assertEquals(playlist.getSongList().get(1).getArtistName(), "Ceca");
+        assertEquals(playlist.getSongList().get(0).getArtistName(), "Dino Merlin");
+        assertEquals(playlist.getSongList().get(1).getArtistName(), "Djordje Balasevic");
     }
 
     @Test
     public void testOrderingByGenre() {
-        SongReader sr = new FileManager();
+        Song s1 = new Song("Kremen", "Dino Merlin", "Zabavna", 4.5, 178, 0);
+        Song s2 = new Song("Andjela", "Djordje Balasevic", "Balada", 4.9, 287, 0);
+        Song s3 = new Song("Pjevam danju pjevam nocu", "Zdravko Colic", "Ex-Yu", 4.4, 260, 0);
+        Song s4 = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
+        List<Song> songs = new ArrayList<>();
+        songs.add(s1);
+        songs.add(s2);
+        songs.add(s3);
+        songs.add(s4);
         Playlist playlist = new Playlist();
-        List<Song> songs;
-        songs = sr.readFile();
         playlist.setSongList(songs);
+        assertEquals(playlist.getSongList().get(0).getGenre(),"Zabavna");
+        assertEquals(playlist.getSongList().get(1).getGenre(), "Balada");
         PlaylistManager.orderByGenre(playlist);
-        assertEquals(playlist.getSongList().get(0).getGenre(), "Folk");
-        assertEquals(playlist.getSongList().get(1).getGenre(), "Pop");
+        assertEquals(playlist.getSongList().get(0).getGenre(), "Balada");
+        assertEquals(playlist.getSongList().get(1).getGenre(), "Ex-Yu");
     }
 
     @Test
     public void testAdd() {
-        SongReader sr = new FileManager();
+        Song s1 = new Song("Kremen", "Dino Merlin", "Zabavna", 4.5, 178, 0);
+        Song s2 = new Song("Andjela", "Djordje Balasevic", "Balada", 4.9, 287, 0);
+        Song s3 = new Song("Pjevam danju pjevam nocu", "Zdravko Colic", "Ex-Yu", 4.4, 260, 0);
+        List<Song> songs = new ArrayList<>();
+        songs.add(s1);
+        songs.add(s2);
+        songs.add(s3);
         Playlist playlist = new Playlist();
-        List<Song> songs;
-        songs = sr.readFile();
         playlist.setSongList(songs);
-        Song song = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
-        PlaylistManager.add(playlist, song);
+        assertEquals(songs.get(songs.size()-1).getSongName(),"Pjevam danju pjevam nocu");
+        Song s4 = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
+        PlaylistManager.add(playlist, s4);
         assertEquals(songs.get(songs.size() - 1).getSongName(), "Ruzmarin");
         assertEquals(songs.get(songs.size() - 1).getGenre(), "Narodna");
     }
 
     @Test
     public void testRemoveWithInt() {
-        SongReader sr = new FileManager();
+        Song s1 = new Song("Kremen", "Dino Merlin", "Zabavna", 4.5, 178, 0);
+        Song s2 = new Song("Andjela", "Djordje Balasevic", "Balada", 4.9, 287, 0);
+        Song s3 = new Song("Pjevam danju pjevam nocu", "Zdravko Colic", "Ex-Yu", 4.4, 260, 0);
+        List<Song> songs = new ArrayList<>();
+        songs.add(s1);
+        songs.add(s2);
+        songs.add(s3);
         Playlist playlist = new Playlist();
-        List<Song> songs;
-        songs = sr.readFile();
         playlist.setSongList(songs);
-        Song song = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
-        songs.add(song);
-        PlaylistManager.remove(playlist, 7);
-        assertEquals(songs.size(), 7);
-        PlaylistManager.remove(playlist, 7);
-        assertEquals(songs.size(), 7);
+        PlaylistManager.remove(playlist, 0);
+        SongReader sr = FileManagerFactory.createSongReader(Manager.FileManager);
+        sr.writeFile(playlist);
+        songs = sr.readFile();
+        assertEquals(songs.size(), 2);
+        assertEquals(songs.get(0).getSongName(), "Andjela");
     }
 
     @Test
-    public void testRemoveWithObject() {
-        SongReader sr = new FileManager();
+    public void testRemoveWithSongName() {
+        Song s1 = new Song("Kremen", "Dino Merlin", "Zabavna", 4.5, 178, 0);
+        Song s2 = new Song("Andjela", "Djordje Balasevic", "Balada", 4.9, 287, 0);
+        Song s3 = new Song("Pjevam danju pjevam nocu", "Zdravko Colic", "Ex-Yu", 4.4, 260, 0);
+        List<Song> songs = new ArrayList<>();
+        songs.add(s1);
+        songs.add(s2);
+        songs.add(s3);
         Playlist playlist = new Playlist();
-        List<Song> songs;
-        songs = sr.readFile();
         playlist.setSongList(songs);
-        Song song = new Song("Ruzmarin", "Sasa Matic", "Narodna", 4.5, 247, 0);
-        songs.add(song);
-        PlaylistManager.remove(playlist, song);
-        assertEquals(songs.size(), 7);
-        PlaylistManager.remove(playlist, song);
-        assertEquals(songs.size(), 7);
+        PlaylistManager.remove(playlist,"Kremen");
+        SongReader sr = FileManagerFactory.createSongReader(Manager.FileManager);
+        sr.writeFile(playlist);
+        songs = sr.readFile();
+        assertEquals(songs.size(), 2);
+        assertEquals(songs.get(0).getSongName(), "Andjela");
     }
 
     @Test

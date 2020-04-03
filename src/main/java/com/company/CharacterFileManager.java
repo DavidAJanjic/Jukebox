@@ -6,6 +6,8 @@ import java.util.List;
 
 public class CharacterFileManager implements SongReader {
 
+
+    @Override
     public List<Song> readFile() {
         List<String> fileList = new ArrayList<>();
         InputStream in = null;
@@ -30,6 +32,7 @@ public class CharacterFileManager implements SongReader {
         return songs;
     }
 
+    @Override
     public void writeFile(Playlist playlist) {
 
         List<Song> songs = playlist.getSongList();

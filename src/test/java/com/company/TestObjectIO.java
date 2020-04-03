@@ -11,27 +11,22 @@ import static org.testng.Assert.*;
 public class TestObjectIO {
 
     @Test
-    public void testWriteObject() {
-        SongReader sr = new ObjectIO();
-        ArrayList<Song> songs = new ArrayList<>();
-        Song s1 = new Song("Merak", "Zdravko Colic", "Folk", 4.9, 211, 0);
-        Song s2 = new Song("Svicarska", "Dino Merlin", "Zabavna", 4.8, 312, 0);
+    public void testReadAndWriteFile() {
+        Song s1 = new Song("Kremen", "Dino Merlin", "Zabavna", 4.5, 178, 0);
+        Song s2 = new Song("Andjela", "Djordje Balasevic", "Balada", 4.9, 287, 0);
+        Song s3 = new Song("Pjevam danju pjevam nocu", "Zdravko Colic", "Ex-Yu", 4.4, 260, 0);
+        List<Song> songs = new ArrayList<>();
         songs.add(s1);
         songs.add(s2);
+        songs.add(s3);
         Playlist playlist = new Playlist();
         playlist.setSongList(songs);
+
+        SongReader sr = FileManagerFactory.createSongReader(Manager.ObjectIO);
         sr.writeFile(playlist);
+        songs = sr.readFile();
+        assertEquals(songs.get(0).getSongName(), "Kremen");
+        assertEquals(songs.get(2).getDuration(), 260);
     }
 
-    @Test
-    public void testReadObject() {
-        SongReader sr = new ObjectIO();
-        Playlist playlist = new Playlist();
-        List<Song> songs;
-        songs = sr.readFile();
-        playlist.setSongList(songs);
-        songs = playlist.getSongList();
-        assertEquals(songs.get(0).getSongName(), "Merak");
-        System.out.println(songs.get(1));
-    }
 }
