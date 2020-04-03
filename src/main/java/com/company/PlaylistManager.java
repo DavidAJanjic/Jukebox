@@ -3,18 +3,19 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class PlaylistManager {
 
 
-    public static ArrayList<Song> setPlayedSongs( ArrayList<Song> songs) {
+    public static void setPlayedSongs(List<Song> songs) {
         ArrayList<Song> playedSongs = new ArrayList<>();
         for (Song x : songs) {
             if (x.getTimesPlayed() > 0) {
                 playedSongs.add(x);
             }
         }
-        return playedSongs;
+        Playlist.setPlayedSongs(playedSongs);
     }
 
     public static void remove(Playlist playlist, int songPlaylistNumber) {
@@ -25,11 +26,15 @@ public class PlaylistManager {
         }
     }
 
-    public static void remove(Playlist playlist, Song song) {
-        if (!(playlist.getSongList().contains(song))) {
+    public static void remove(Playlist playlist, String songName) {
+        ArrayList<String> songNames = new ArrayList<>();
+        for (Song x : playlist.getSongList()){
+            songNames.add(x.getSongName());
+        }
+        if (!(songNames.contains(songName))) {
             System.out.println("Nema te pesme u listi!");
         } else {
-            playlist.getSongList().remove(song);
+            playlist.getSongList().removeIf(x -> x.getSongName().equals(songName));
         }
     }
 

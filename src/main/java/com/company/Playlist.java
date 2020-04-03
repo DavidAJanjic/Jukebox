@@ -1,34 +1,25 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Playlist {
-    private static int streamType;
-    private ArrayList<Song> songList = new ArrayList<>();
-    private static ArrayList<Song> playedSongs = new ArrayList<>();
+    private List<Song> songList = new ArrayList<>();
+    private static List<Song> playedSongs = new ArrayList<>();
 
-
-    public static int getStreamType() {
-        return streamType;
-    }
-
-    public static void setStreamType(int streamType) {
-        Playlist.streamType = streamType;
-    }
-
-    public ArrayList<Song> getSongList() {
+    public List<Song> getSongList() {
         return songList;
     }
 
-    public void setSongList(ArrayList<Song> songList) {
+    public void setSongList(List<Song> songList) {
         this.songList = songList;
     }
 
-    public static ArrayList<Song> getPlayedSongs() {
+    public static List<Song> getPlayedSongs() {
         return playedSongs;
     }
 
-    public static void setPlayedSongs(ArrayList<Song> playedSongs) {
+    public static void setPlayedSongs(List<Song> playedSongs) {
         Playlist.playedSongs = playedSongs;
     }
 }

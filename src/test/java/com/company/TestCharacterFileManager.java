@@ -5,30 +5,29 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
 public class TestCharacterFileManager {
 
     @Test
-    public void testReadFile() throws IOException { //sa ArrayList<String>()
-        Playlist playlist = new Playlist();
-        playlist.setSongList(Parser.parse(CharacterFileManager.readFile()));
-        assertEquals(playlist.getSongList().get(4).getSongName(), "Zauvek");
-    }
-
-    @Test
-    public void testWriteFile() throws  IOException{
-        Playlist playlist = new Playlist();
-        ArrayList<Song> songs = new ArrayList<>();
+    public void testReadAndWriteFile() {
         Song s1 = new Song("Kremen", "Dino Merlin", "Zabavna", 4.5, 178, 0);
         Song s2 = new Song("Andjela", "Djordje Balasevic", "Balada", 4.9, 287, 0);
+        Song s3 = new Song("Pjevam danju pjevam nocu", "Zdravko Colic", "Ex-Yu", 4.4, 260, 0);
+        List<Song> songs = new ArrayList<>();
         songs.add(s1);
         songs.add(s2);
+        songs.add(s3);
+        Playlist playlist = new Playlist();
         playlist.setSongList(songs);
-        CharacterFileManager.writeFile(playlist);
-        songs = Parser.parse(CharacterFileManager.readFile());
-        assertEquals(songs.get(0).getSongName(),"Kremen");
 
+        SongReader sr = FileManagerFactory.createSongReader(Manager.CharacterFileManager);
+        sr.writeFile(playlist);
+        songs = sr.readFile();
+        assertEquals(songs.get(0).getSongName(), "Kremen");
+        assertEquals(songs.get(2).getDuration(), 260);
     }
+
 }

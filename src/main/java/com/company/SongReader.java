@@ -3,14 +3,11 @@ package com.company;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public interface SongReader {
+public interface SongReader<T> {
 
-    static ArrayList<String> readFile() throws FileNotFoundException, IOException {
-        return null;
-    }
+    List<T> readFile();
 
-    static void writeFile(Playlist playlist) throws FileNotFoundException {
-
-    }
+    void writeFile(Playlist playlist);
 }
